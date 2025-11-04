@@ -1,81 +1,103 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, Activity, AlertCircle, CheckCircle } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [success, setSuccess] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    rememberMe: false
+    rememberMe: false,
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? checked : value,
     });
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors({ ...errors, [name]: '' });
     }
   };
 
   const validateForm = () => {
-    const newErrors: {[key: string]: string} = {};
-    
+    const newErrors: { [key: string]: string } = {};
+
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-    
+
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-    
+
     return newErrors;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+    console.log('Login form submitted:', formData);
+
     const newErrors = validateForm();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    
+
     setIsLoading(true);
     setErrors({});
-    
+
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Simulate success
+      console.log('Attempting login...');
+      await login(formData.email, formData.password);
+      console.log('Login successful');
       setSuccess('Login successful! Redirecting...');
       setTimeout(() => {
-        // In a real app, you would redirect to dashboard or home
-        console.log('Login successful:', formData);
+        navigate('/');
       }, 1000);
-      
-    } catch (error) {
-      setErrors({ general: 'Login failed. Please check your credentials and try again.' });
+    } catch (error: any) {
+      console.error('Login error:', error);
+      setErrors({
+        general: error.message || 'Login failed. Please check your credentials and try again.',
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleGoogleLogin = () => {
-    // Simulate Google login
-    console.log('Google login initiated');
+  const handleGoogleLogin = async () => {
+    try {
+      console.log('Google login initiated');
+      // For now, simulate Google login with test data
+      // In a real app, you would integrate with Google OAuth
+      const mockGoogleUser = {
+        email: 'test@gmail.com',
+        firstName: 'Google',
+        lastName: 'User',
+        username: 'googleuser'
+      };
+      
+      // Simulate successful Google login
+      setSuccess('Google login successful! Redirecting...');
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
+    } catch (error: any) {
+      setErrors({
+        general: 'Google login failed. Please try again.',
+      });
+    }
   };
 
   return (
@@ -86,32 +108,43 @@ const Login = () => {
             <div className="bg-violet-600 p-2 rounded-lg group-hover:bg-violet-500 transition-colors">
               <Activity className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900 dark:text-white">Apollo</span>
+            <span className="text-xl font-bold text-gray-900 dark:text-white">
+              Cura
+            </span>
           </Link>
-          <h2 className="mt-6 text-2xl font-bold text-gray-900 dark:text-white">Welcome back</h2>
-          <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">Sign in to your account</p>
+          <h2 className="mt-6 text-2xl font-bold text-gray-900 dark:text-white">
+            Welcome back
+          </h2>
+          <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+            Sign in to your account
+          </p>
         </div>
 
         <div className="bg-white dark:bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-gray-200 dark:border-white/20 shadow-2xl">
-          {/* Success Message */}
           {success && (
             <div className="mb-4 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center space-x-2">
               <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
-              <span className="text-sm text-green-700 dark:text-green-300">{success}</span>
+              <span className="text-sm text-green-700 dark:text-green-300">
+                {success}
+              </span>
             </div>
           )}
-          
-          {/* General Error */}
+
           {errors.general && (
             <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center space-x-2">
               <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
-              <span className="text-sm text-red-700 dark:text-red-300">{errors.general}</span>
+              <span className="text-sm text-red-700 dark:text-red-300">
+                {errors.general}
+              </span>
             </div>
           )}
-          
+
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >
                 Email address
               </label>
               <div className="relative">
@@ -125,17 +158,26 @@ const Login = () => {
                   required
                   value={formData.email}
                   onChange={handleInputChange}
-                  className={`block w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-slate-800/50 border ${errors.email ? 'border-red-500' : 'border-gray-300 dark:border-slate-700'} rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors text-sm`}
+                  className={`block w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-slate-800/50 border ${
+                    errors.email
+                      ? 'border-red-500'
+                      : 'border-gray-300 dark:border-slate-700'
+                  } rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors text-sm`}
                   placeholder="Enter your email"
                 />
               </div>
               {errors.email && (
-                <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.email}</p>
+                <p className="mt-1 text-xs text-red-600 dark:text-red-400">
+                  {errors.email}
+                </p>
               )}
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >
                 Password
               </label>
               <div className="relative">
@@ -149,7 +191,11 @@ const Login = () => {
                   required
                   value={formData.password}
                   onChange={handleInputChange}
-                  className={`block w-full pl-9 pr-10 py-2.5 bg-gray-50 dark:bg-slate-800/50 border ${errors.password ? 'border-red-500' : 'border-gray-300 dark:border-slate-700'} rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors text-sm`}
+                  className={`block w-full pl-9 pr-10 py-2.5 bg-gray-50 dark:bg-slate-800/50 border ${
+                    errors.password
+                      ? 'border-red-500'
+                      : 'border-gray-300 dark:border-slate-700'
+                  } rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors text-sm`}
                   placeholder="Enter your password"
                 />
                 <button
@@ -165,7 +211,9 @@ const Login = () => {
                 </button>
               </div>
               {errors.password && (
-                <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.password}</p>
+                <p className="mt-1 text-xs text-red-600 dark:text-red-400">
+                  {errors.password}
+                </p>
               )}
             </div>
 
@@ -173,20 +221,25 @@ const Login = () => {
               <div className="flex items-center">
                 <input
                   id="remember-me"
-                  name="remember-me"
                   name="rememberMe"
                   type="checkbox"
                   checked={formData.rememberMe}
                   onChange={handleInputChange}
                   className="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 dark:border-gray-600 rounded bg-gray-50 dark:bg-slate-800"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                <label
+                  htmlFor="remember-me"
+                  className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
+                >
                   Remember me
                 </label>
               </div>
 
               <div className="text-sm">
-                <a href="#" className="text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 font-medium">
+                <a
+                  href="#"
+                  className="text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 font-medium"
+                >
                   Forgot your password?
                 </a>
               </div>
@@ -206,7 +259,9 @@ const Login = () => {
                   <div className="w-full border-t border-gray-300 dark:border-gray-600" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white dark:bg-transparent text-gray-500 dark:text-gray-400">Or continue with</span>
+                  <span className="px-2 bg-white dark:bg-transparent text-gray-500 dark:text-gray-400">
+                    Or continue with
+                  </span>
                 </div>
               </div>
 
@@ -243,7 +298,10 @@ const Login = () => {
           <div className="mt-6 text-center">
             <p className="text-gray-600 dark:text-gray-400 text-sm">
               Don't have an account?{' '}
-              <Link to="/signup" className="text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 font-medium">
+              <Link
+                to="/signup"
+                className="text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 font-medium"
+              >
                 Sign up
               </Link>
             </p>

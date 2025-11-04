@@ -25,7 +25,7 @@ const UseCases = () => {
       icon: Globe,
       title: 'Medical Translation',
       description: 'Communicate medical information across language barriers with accurate translations.',
-      features: ['6 language support', 'Medical terminology', 'Cultural context', 'Real-time translation'],
+      features: ['2 language support', 'Medical terminology', 'Cultural context', 'Real-time translation'],
       color: 'from-blue-500 to-cyan-500'
     },
     {
@@ -66,11 +66,11 @@ const UseCases = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-white">
             Use Cases for{' '}
             <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
-              Apollo AI
+              CURA AI
             </span>
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Discover how Apollo's advanced medical AI can transform healthcare delivery, 
+            Discover how CURA's advanced medical AI can transform healthcare delivery, 
             research, and patient education across diverse scenarios and languages.
           </p>
         </div>
@@ -120,14 +120,14 @@ const UseCases = () => {
                 <div className="w-16 h-16 bg-violet-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Heart className="w-8 h-8 text-white" />
                 </div>
-                <div className="text-3xl font-bold text-white mb-2">6B+</div>
+                <div className="text-3xl font-bold text-white mb-2">2B+</div>
                 <div className="text-gray-300">People Supported</div>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Globe className="w-8 h-8 text-white" />
                 </div>
-                <div className="text-3xl font-bold text-white mb-2">6</div>
+                <div className="text-3xl font-bold text-white mb-2">2</div>
                 <div className="text-gray-300">Languages Supported</div>
               </div>
               <div className="text-center">
@@ -147,11 +147,11 @@ const UseCases = () => {
             Ready to Transform Healthcare?
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Experience the power of Apollo AI across these use cases. Start your journey towards smarter healthcare today.
+            Experience the power of CURA AI across these use cases. Start your journey towards smarter healthcare today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="group bg-violet-600 hover:bg-violet-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-violet-500/25">
-              <span>Try Apollo Now</span>
+              <span>Try CURA Now</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <button className="group border-2 border-violet-600 text-violet-400 hover:bg-violet-600 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2">

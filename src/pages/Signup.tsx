@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, User, Activity, AlertCircle, CheckCircle } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const Signup = () => {
+  const { register } = useAuth();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
   const [success, setSuccess] = useState('');
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -31,10 +36,22 @@ const Signup = () => {
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
     
-    if (!formData.name.trim()) {
-      newErrors.name = 'Full name is required';
-    } else if (formData.name.trim().length < 2) {
-      newErrors.name = 'Name must be at least 2 characters';
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required';
+    } else if (formData.firstName.trim().length < 2) {
+      newErrors.firstName = 'First name must be at least 2 characters';
+    }
+    
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required';
+    } else if (formData.lastName.trim().length < 2) {
+      newErrors.lastName = 'Last name must be at least 2 characters';
+    }
+    
+    if (!formData.username.trim()) {
+      newErrors.username = 'Username is required';
+    } else if (formData.username.trim().length < 3) {
+      newErrors.username = 'Username must be at least 3 characters';
     }
     
     if (!formData.email) {
@@ -45,10 +62,8 @@ const Signup = () => {
     
     if (!formData.password) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
-    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
-      newErrors.password = 'Password must contain uppercase, lowercase, and number';
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
     }
     
     if (!formData.confirmPassword) {
@@ -66,6 +81,7 @@ const Signup = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Signup form submitted:', formData);
     
     const newErrors = validateForm();
     if (Object.keys(newErrors).length > 0) {
@@ -77,26 +93,52 @@ const Signup = () => {
     setErrors({});
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Simulate success
-      setSuccess('Account created successfully! Please check your email to verify your account.');
+      console.log('Attempting registration...');
+      await register({
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+        firstName: formData.firstName,
+        lastName: formData.lastName
+      });
+      console.log('Registration successful');
+      setSuccess('Account created successfully! Redirecting...');
       setTimeout(() => {
-        // In a real app, you would redirect to login or dashboard
-        console.log('Signup successful:', formData);
-      }, 2000);
+        navigate('/');
+      }, 1000);
       
-    } catch (error) {
-      setErrors({ general: 'Signup failed. Please try again.' });
+    } catch (error: any) {
+      console.error('Registration error:', error);
+      setErrors({ 
+        general: error.message || 'Signup failed. Please try again.' 
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleGoogleSignup = () => {
-    // Simulate Google signup
-    console.log('Google signup initiated');
+  const handleGoogleSignup = async () => {
+    try {
+      console.log('Google signup initiated');
+      // For now, simulate Google signup with test data
+      // In a real app, you would integrate with Google OAuth
+      const mockGoogleUser = {
+        email: 'test@gmail.com',
+        firstName: 'Google',
+        lastName: 'User',
+        username: 'googleuser'
+      };
+      
+      // Simulate successful Google signup
+      setSuccess('Google signup successful! Redirecting...');
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
+    } catch (error: any) {
+      setErrors({
+        general: 'Google signup failed. Please try again.',
+      });
+    }
   };
 
   return (
@@ -107,10 +149,10 @@ const Signup = () => {
             <div className="bg-violet-600 p-2 rounded-lg group-hover:bg-violet-500 transition-colors">
               <Activity className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900 dark:text-white">Apollo</span>
+            <span className="text-xl font-bold text-gray-900 dark:text-white">Cura</span>
           </Link>
           <h2 className="mt-6 text-2xl font-bold text-gray-900 dark:text-white">Create your account</h2>
-          <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">Join Apollo and get personalized healthcare AI</p>
+          <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">Join Cura and get personalized healthcare AI</p>
         </div>
 
         <div className="bg-white dark:bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-gray-200 dark:border-white/20 shadow-2xl">
@@ -131,27 +173,77 @@ const Signup = () => {
           )}
           
           <form className="space-y-6" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  First Name
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <User className="h-4 w-4 text-gray-400" />
+                  </div>
+                  <input
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    required
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    className={`block w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-slate-800/50 border ${errors.firstName ? 'border-red-500' : 'border-gray-300 dark:border-slate-700'} rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors text-sm`}
+                    placeholder="First name"
+                  />
+                </div>
+                {errors.firstName && (
+                  <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.firstName}</p>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Last Name
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <User className="h-4 w-4 text-gray-400" />
+                  </div>
+                  <input
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    required
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    className={`block w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-slate-800/50 border ${errors.lastName ? 'border-red-500' : 'border-gray-300 dark:border-slate-700'} rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors text-sm`}
+                    placeholder="Last name"
+                  />
+                </div>
+                {errors.lastName && (
+                  <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.lastName}</p>
+                )}
+              </div>
+            </div>
+
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Full Name
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Username
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <User className="h-4 w-4 text-gray-400" />
                 </div>
                 <input
-                  id="name"
-                  name="name"
+                  id="username"
+                  name="username"
                   type="text"
                   required
-                  value={formData.name}
+                  value={formData.username}
                   onChange={handleInputChange}
-                  className={`block w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-slate-800/50 border ${errors.name ? 'border-red-500' : 'border-gray-300 dark:border-slate-700'} rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors text-sm`}
-                  placeholder="Enter your full name"
+                  className={`block w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-slate-800/50 border ${errors.username ? 'border-red-500' : 'border-gray-300 dark:border-slate-700'} rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors text-sm`}
+                  placeholder="Choose a username"
                 />
               </div>
-              {errors.name && (
-                <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.name}</p>
+              {errors.username && (
+                <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.username}</p>
               )}
             </div>
 

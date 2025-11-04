@@ -21,7 +21,7 @@ const Chatbot = () => {
     {
       id: 1,
       type: 'bot',
-      content: "Hello! I'm Apollo, your AI healthcare assistant. Feel free to ask about your symptoms, conditions, medications, or any health-related questions. How can I help you today?",
+      content: "Hello! I'm Cura, your AI healthcare assistant. Feel free to ask about your symptoms, conditions, medications, or any health-related questions. How can I help you today?",
       timestamp: new Date()
     }
   ]);
@@ -32,11 +32,8 @@ const Chatbot = () => {
 
   const languages = [
     { code: 'EN', name: 'English' },
-    { code: 'HI', name: 'हिंदी' },
-    { code: 'FR', name: 'Français' },
-    { code: 'ZH', name: '中文' },
-    { code: 'ES', name: 'Español' },
-    { code: 'AR', name: 'العربية' }
+    { code: 'ES', name: 'Español' }
+    
   ];
 
   const chatHistory = [
@@ -126,7 +123,7 @@ const Chatbot = () => {
                 <div className="bg-violet-600 p-2 rounded-lg group-hover:bg-violet-500 transition-colors">
                   <Activity className="h-6 w-6 text-white" />
                 </div>
-                <span className="text-xl font-bold text-white hidden sm:block">Apollo Chat</span>
+                <span className="text-xl font-bold text-white hidden sm:block">Cura Chat</span>
               </Link>
             </div>
 
@@ -232,7 +229,7 @@ const Chatbot = () => {
               </button>
             </div>
             <div className="mt-2 text-xs text-gray-500 text-center">
-              Apollo AI can make mistakes. Please consult healthcare professionals for medical advice.
+             CURA AI can make mistakes. Please consult healthcare professionals for medical advice.
             </div>
           </div>
         </div>
@@ -285,7 +282,7 @@ const SidebarContent = ({ isMemoryOn, setIsMemoryOn, chatHistory, onClose }: any
           </button>
         </div>
         <p className="text-xs text-gray-400 mt-1">
-          {isMemoryOn ? 'Apollo remembers your conversations' : 'Each chat starts fresh'}
+          {isMemoryOn ? 'Cura remembers your conversations' : 'Each chat starts fresh'}
         </p>
       </div>
 

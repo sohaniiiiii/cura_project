@@ -83,19 +83,19 @@ const Contact = () => {
 
   const faqItems = [
     {
-      question: 'How accurate are Apollo\'s medical responses?',
-      answer: 'Apollo maintains 95%+ accuracy in medical responses, validated by healthcare professionals. However, it should supplement, not replace, professional medical advice.'
+      question: 'How accurate are CURA\'s medical responses?',
+      answer: 'CURA maintains 95%+ accuracy in medical responses, validated by healthcare professionals. However, it should supplement, not replace, professional medical advice.'
     },
     {
-      question: 'Which languages does Apollo support?',
-      answer: 'Apollo currently supports English, Hindi, French, Chinese (Mandarin), Spanish, and Arabic, with plans to expand to more languages.'
+      question: 'Which languages does Cura support?',
+      answer: 'Cura currently supports English and Spanish with plans to expand to more languages.'
     },
     {
       question: 'Is my health data secure?',
-      answer: 'Yes, Apollo uses enterprise-grade encryption and is HIPAA-compliant. Your data is encrypted in transit and at rest, and never shared without consent.'
+      answer: 'Yes, Cura uses enterprise-grade encryption and is HIPAA-compliant. Your data is encrypted in transit and at rest, and never shared without consent.'
     },
     {
-      question: 'Can healthcare institutions integrate Apollo?',
+      question: 'Can healthcare institutions integrate Cura?',
       answer: 'Absolutely! We offer enterprise solutions with custom integrations, API access, and specialized training for healthcare organizations.'
     }
   ];
@@ -112,7 +112,7 @@ const Contact = () => {
             </span>
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Have questions about Apollo? Want to partner with us? We'd love to hear from you. 
+            Have questions about Cura? Want to partner with us? We'd love to hear from you. 
             Our team is here to help you harness the power of AI for better healthcare.
           </p>
         </div>
@@ -296,7 +296,7 @@ const Contact = () => {
           </h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             Whether you're a healthcare professional, researcher, or innovator, 
-            let's explore how Apollo can advance your mission.
+            let's explore how Cura can advance your mission.
           </p>
           <button className="bg-violet-600 hover:bg-violet-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-violet-500/25">
             Schedule a Demo

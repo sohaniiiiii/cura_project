@@ -7,7 +7,7 @@ const Home = () => {
     {
       icon: Brain,
       title: 'Persistent Memory',
-      description: 'Apollo remembers your medical history and previous conversations for personalized care.'
+      description: 'CURA remembers your medical history and previous conversations for personalized care.'
     },
     {
       icon: Users,
@@ -22,7 +22,7 @@ const Home = () => {
     {
       icon: Globe,
       title: 'Multilingual Support',
-      description: 'Communicate in 6 languages: English, Hindi, French, Chinese, Spanish, and Arabic.'
+      description: 'Communicate in 2 languages: English and Spanish.'
     },
     {
       icon: Image,
@@ -40,68 +40,6 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-16 lg:py-24 overflow-hidden">
-  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="grid lg:grid-cols-2 gap-12 items-center">
-      {/* Left: Text */}
-      <div className="space-y-6">
-        <div className="space-y-3">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
-            Smarter Healthcare,
-          </h1>
-          <p className="text-violet-400 font-medium">Powered by Apollo</p>
-          <p className="text-lg text-gray-300 leading-relaxed max-w-xl">
-            Apollo is a lightweight multilingual medical LLM designed to bring healthcare AI
-            to 2.5B+ people in 6 global languages.
-          </p>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-3">
-          <Link
-            to="/features"
-            className="group bg-violet-600 hover:bg-violet-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-violet-500/25 text-sm"
-          >
-            <span>Explore Apollo</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-          <Link
-            to="/chatbot"
-            className="group border border-violet-500 text-violet-400 hover:bg-violet-600 hover:text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center space-x-2 text-sm"
-          >
-            <span>View Live Demo</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-      </div>
-
-      {/* Right: Image + Chat Overlay */}
-      <div className="relative lg:order-last">
-        {/* Main Image */}
-        <img
-          src="public\images\hero_img.jpg"
-          alt="Doctor using futuristic healthcare AI"
-          className="w-full h-auto rounded-xl shadow-lg"
-        />
-
-        {/* Chat Bubble 1 (User) */}
-        <div className="absolute bottom-28 left-6 bg-black/90 text-white px-4 py-3 rounded-2xl shadow-lg text-sm max-w-xs border border-white/10">
-          <div className="flex items-start space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white/70 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-            <span>What are the symptoms of malaria?</span>
-          </div>
-        </div>
-
-        {/* Chat Bubble 2 (AI) */}
-        <div className="absolute bottom-6 left-16 bg-gradient-to-r from-violet-600 to-violet-500 text-white px-4 py-3 rounded-2xl shadow-lg text-sm max-w-xs border border-violet-400/20">
-          Common symptoms include fever, chills, and sweating. Would you like guidance on diagnosis steps?
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* <section className="relative py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 via-transparent to-blue-600/10 dark:from-violet-600/20 dark:via-transparent dark:to-blue-600/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -110,11 +48,11 @@ const Home = () => {
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
                   Smarter Healthcare,{' '}
                   <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
-                    Powered by Apollo
+                    Powered by Cura
                   </span>
                 </h1>
                 <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl">
-                  Apollo is a lightweight multilingual medical LLM designed to bring healthcare AI to 6B+ people in 6 languages.
+                  Cura is a lightweight multilingual medical LLM designed to bring healthcare AI to 2B+ people in 2 languages.
                 </p>
               </div>
               
@@ -123,7 +61,7 @@ const Home = () => {
                   to="/features"
                   className="group bg-violet-600 hover:bg-violet-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-violet-500/25 text-sm"
                 >
-                  <span>Explore Apollo</span>
+                  <span>Explore Cura</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
@@ -134,10 +72,10 @@ const Home = () => {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
-            </div> */}
+            </div>
 
             {/* Hero Image */}
-            {/* <div className="relative lg:order-last">
+            <div className="relative lg:order-last">
               <div className="relative w-full h-80 lg:h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-violet-600/20 to-blue-600/20 dark:from-violet-600/30 dark:to-blue-600/30 backdrop-blur-sm border border-violet-500/20 dark:border-violet-500/30">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center space-y-4">
@@ -151,8 +89,8 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div> 
-      </section> */}
+        </div>
+      </section>
 
       {/* Features Section */}
       <section className="py-16 bg-gray-50 dark:bg-slate-800/50">
@@ -162,7 +100,7 @@ const Home = () => {
               Powerful Features for Better Healthcare
             </h2>
             <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Apollo combines cutting-edge AI with medical expertise to provide personalized healthcare assistance.
+              Cura combines cutting-edge AI with medical expertise to provide personalized healthcare assistance.
             </p>
           </div>
 
@@ -191,13 +129,13 @@ const Home = () => {
               Ready to Experience Smarter Healthcare?
             </h2>
             <p className="text-base text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-              Join thousands of users who trust Apollo for their healthcare needs. Start your conversation today.
+              Join thousands of users who trust Cura for their healthcare needs. Start your conversation today.
             </p>
             <Link
               to="/chatbot"
               className="group bg-violet-600 hover:bg-violet-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 inline-flex items-center space-x-2 shadow-lg hover:shadow-violet-500/25 text-sm"
             >
-              <span>Try Apollo Now</span>
+              <span>Try Cura Now</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

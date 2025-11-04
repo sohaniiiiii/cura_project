@@ -16,31 +16,9 @@ import {
 const Features = () => {
   const coreFeatures = [
     {
-      icon: Brain,
-      title: 'Proxy Tuning Support',
-      description: 'Advanced fine-tuning capabilities that adapt Apollo to specific medical domains and use cases.',
-      details: [
-        'Domain-specific customization',
-        'Performance optimization',
-        'Specialized knowledge integration',
-        'Continuous learning capabilities'
-      ]
-    },
-    {
-      icon: Upload,
-      title: 'Custom Dataset Upload',
-      description: 'Upload and integrate your own medical datasets to enhance Apollo\'s knowledge base.',
-      details: [
-        'Secure data handling',
-        'Multiple file format support',
-        'Automated data processing',
-        'HIPAA-compliant storage'
-      ]
-    },
-    {
       icon: MessageSquare,
       title: 'Real-time Multilingual Chat',
-      description: 'Seamless communication in 6 languages with instant translation and context preservation.',
+      description: 'Seamless communication in 2 languages with instant translation and context preservation.',
       details: [
         'Live language switching',
         'Context-aware translations',
@@ -51,7 +29,7 @@ const Features = () => {
     {
       icon: Clock,
       title: 'Memory Across Sessions',
-      description: 'Apollo remembers your medical history and previous conversations for personalized care.',
+      description: 'Cura remembers your medical history and previous conversations for personalized care.',
       details: [
         'Persistent conversation history',
         'Medical timeline tracking',
@@ -88,7 +66,7 @@ const Features = () => {
     'Reduce diagnostic errors by up to 40%',
     'Save healthcare providers 2+ hours daily',
     'Improve patient satisfaction scores',
-    'Support 6B+ people in their native language',
+    'Support 2B+ people in their native language',
     'Available 24/7 without downtime',
     'Continuous learning and improvement'
   ];
@@ -105,7 +83,7 @@ const Features = () => {
             </span>
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Apollo combines cutting-edge AI technology with healthcare expertise to deliver 
+            CURA combines cutting-edge AI technology with healthcare expertise to deliver 
             a comprehensive medical assistant that scales globally.
           </p>
         </div>
@@ -176,7 +154,7 @@ const Features = () => {
                 Proven Results in Healthcare
               </h2>
               <p className="text-xl text-gray-300 leading-relaxed">
-                Apollo has been designed based on extensive research and real-world healthcare needs, 
+                CURA has been designed based on extensive research and real-world healthcare needs, 
                 delivering measurable improvements in patient outcomes and provider efficiency.
               </p>
             </div>
@@ -202,23 +180,20 @@ const Features = () => {
               ))}
             </div>
             <blockquote className="text-2xl md:text-3xl font-medium text-white leading-relaxed">
-              "Apollo has revolutionized how we deliver healthcare services. The multilingual support 
+              "CURA has revolutionized how we deliver healthcare services. The multilingual support 
               and accurate medical insights have helped us serve our diverse patient population better than ever."
             </blockquote>
-            <div className="text-gray-400">
-              <p className="font-semibold">Dr. Sarah Chen</p>
-              <p>Chief Medical Officer, Global Health Initiative</p>
-            </div>
+           
           </div>
         </div>
 
         {/* CTA Section */}
         <div className="text-center space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold text-white">
-            Experience Apollo's Full Potential
+            Experience CURA's Full Potential
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Join healthcare professionals worldwide who trust Apollo for intelligent medical assistance.
+            Join healthcare professionals worldwide who trust CURA for intelligent medical assistance.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="group bg-violet-600 hover:bg-violet-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-violet-500/25">
